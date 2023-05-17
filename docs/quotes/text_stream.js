@@ -1,6 +1,7 @@
 
-function textStream(div, text, index = 0, interval = 80) {
+function textStream(div, text, callback, index = 0, interval = 50) {
     if (index >= text.length) {
+        callback();
         return;
     }
     let char = text[index];
@@ -14,10 +15,22 @@ function textStream(div, text, index = 0, interval = 80) {
         div.appendChild(span);
     }
 
+    let interval_addtion = 0;
+    if (char == ",") {
+        interval_addtion = 100;
+    } else if (char == ".") {
+        interval_addtion = 200;
+    }
+
     window.setTimeout(
-        () => { textStream(div, text, index + 1, interval) },
-        interval
+        () => { textStream(div, text, callback, index + 1, interval) },
+        interval + interval_addtion
     )
+}
+
+function showAuthor() {
+    document.getElementById("quote-author").classList.add("fade-in");
+    document.getElementById("cursor").classList.add("disapeer");
 }
 
 window.addEventListener("load", () => {
@@ -29,23 +42,11 @@ window.addEventListener("load", () => {
         Echoing torments in eternal keep.
         Through haunted tales and macabre plight,
         His words a haunting melody in the night.
-
-        A heart once tethered to lost love's grief,
-        Each syllable weaved, granting no relief.
-        His tortured soul, a symphony of woe,
-        In cryptic rhythms, his emotions flow.
-
-        Ethereal dreams cast in somber verse,
-        Unveiling depths of sorrow, his curse.
-        In dreams, he found refuge from mortal pain,
-        But woke to a world drenched in sorrow's rain.
-
-        Oh, Edgar, master of darkness profound,
-        Your words in timeless echoes resound.
-        A poet's soul, forevermore embraced,
-        In realms of sorrow, you've eternally traced.
         `;
-    textStream(document.getElementById("quote-main"),
-        sampleText);
+    textStream(
+        document.getElementById("quote-main"),
+        sampleText,
+        showAuthor,
+    );
 }
 );

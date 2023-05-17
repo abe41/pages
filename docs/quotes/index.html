@@ -12,16 +12,34 @@
     <title>Text Stream</title>
 </head>
 
+<!--
+    TODO:
+    - ゲームのセリフ進めるような機能。文字量多すぎない
+    - タップで次のセリフに進める機能
+    - 全部読み終わったらAuthor表示してからそれがNextボタンに切り替わる(アイコンでも可)
+    Note:
+    - 情報は必要な時だけに表示させる。これで疲弊を防ぐ
+    - 何となく手軽に英文を集中して読みたい時に使う
+-->
+
 <body>
     <div id="app">
-        <h2>Quotes</h2>
+        <h2>
+            <span id="app-1" style="--i:1">Q</span>
+            <span style="--i:3">u</span>
+            <span style="--i:3">o</span>
+            <span style="--i:4">t</span>
+            <span style="--i:5">e</span>
+            <span style="--i:6">s</span>
+        </h2>
         <div id="quote">
             <div id="quote-main">
             </div>
-            <div id="quote-author">
+            <div id="cursor" class="blink-animation">▍</div>
+            <div id="quote-author" class="fade-out">
+                John Smith
             </div>
         </div>
-        <div id="cursor" class="blink-animation">▍</div>
     </div>
 </body>
 
